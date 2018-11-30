@@ -1,0 +1,24 @@
+type Line {
+  id: ID!
+  name: String!
+  description: String!
+  color: String!
+  routes: [Route!]!
+}
+
+type Route {
+  name: String!
+  stops: [Stop!]!
+}
+
+type Stop {
+  id: ID!
+  name: String!
+  areaName: String
+  location: Location!
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
+}
