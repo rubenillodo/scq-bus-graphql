@@ -1,6 +1,7 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { LinesResponse } from './LinesResponse';
 import { LineResponse } from './LineResponse';
+import { StopResponse } from './StopResponse';
 
 export class OfficialApi extends RESTDataSource {
   constructor() {
@@ -14,5 +15,9 @@ export class OfficialApi extends RESTDataSource {
 
   async getLine({ id }: { id: number | string }): Promise<LineResponse> {
     return this.get<LineResponse>(`lineas/${id}`);
+  }
+
+  async getStop({ id }: { id: number | string }): Promise<StopResponse> {
+    return this.get<StopResponse>(`paradas/${id}`);
   }
 }
