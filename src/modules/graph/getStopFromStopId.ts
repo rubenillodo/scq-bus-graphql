@@ -1,5 +1,6 @@
 import { AppContext } from '../types/context';
-import { Stop } from '../types';
+import { Stop, Arriving } from '../types';
+import { DateTime, IANAZone } from 'luxon';
 
 export interface Params {
   stopId: string;
@@ -23,6 +24,14 @@ export const getStopFromStopId = async ({
       longitude: response.coordenadas.longitud,
     },
     routes: [],
-    arriving: [],
+    arriving: response.lineas.map(
+      ({ id, proximoPaso }) =>
+        ({
+          line: { id: `${id}` },
+          arriveAt: DateTime.fromFormat(proximoPaso, 'yyyy-MM-dd HH:mm', {
+            zone: new IANAZone('Europe/Madrid'),
+          }),
+        } as Arriving),
+    ),
   };
 };
