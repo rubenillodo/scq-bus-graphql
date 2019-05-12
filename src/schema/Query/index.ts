@@ -1,4 +1,4 @@
-import { QueryResolvers } from '../../modules/types';
+import { QueryResolvers, Stop } from '../../modules/types';
 import { getRoutesFromLineId, getLineFromLineId } from '../../modules/graph';
 
 export const Query: QueryResolvers = {
@@ -24,5 +24,28 @@ export const Query: QueryResolvers = {
     return (await Promise.all(
       lineIds.map(async id => getRoutesFromLineId({ lineId: id, context })),
     )).flat();
+  },
+  stops: async (_parent, _args, context) => {
+    const lineIds = (await context.dataSources.officialApi.getLines()).map(
+      ({ id }) => `${id}`,
+    );
+
+    const routes = (await Promise.all(
+      lineIds.map(async id => getRoutesFromLineId({ lineId: id, context })),
+    )).flat();
+
+    const stops: Stop[] = [];
+
+    routes.forEach(route => {
+      route.stops.forEach(stop => {
+        if (stops.find(({ id }) => id === stop.id)) {
+          return;
+        }
+
+        stops.push(stop);
+      });
+    });
+
+    return stops;
   },
 };

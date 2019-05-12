@@ -36,6 +36,7 @@ export type Query = {
   lines: Array<Line>;
   line?: Maybe<Line>;
   routes: Array<Route>;
+  stops: Array<Stop>;
 };
 
 export type QueryLineArgs = {
@@ -195,6 +196,7 @@ export type QueryResolvers<
     QueryLineArgs
   >;
   routes?: Resolver<Array<ResolversTypes['Route']>, ParentType, ContextType>;
+  stops?: Resolver<Array<ResolversTypes['Stop']>, ParentType, ContextType>;
 };
 
 export type RouteResolvers<
