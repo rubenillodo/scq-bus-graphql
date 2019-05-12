@@ -1,5 +1,9 @@
 import { QueryResolvers, Stop } from '../../modules/types';
-import { getRoutesFromLineId, getLineFromLineId } from '../../modules/graph';
+import {
+  getRoutesFromLineId,
+  getLineFromLineId,
+  getStopFromStopId,
+} from '../../modules/graph';
 
 export const Query: QueryResolvers = {
   lines: async (_parent, _args, { dataSources: { officialApi } }) => {
@@ -47,5 +51,8 @@ export const Query: QueryResolvers = {
     });
 
     return stops;
+  },
+  stop: async (_parent, { id }, context) => {
+    return getStopFromStopId({ stopId: id, context });
   },
 };

@@ -5,4 +5,5 @@ type Query {
   line(id: ID!): Line
   routes: [Route!]!
   stops: [Stop!]!
+  stop(id: ID!): Stop
 }

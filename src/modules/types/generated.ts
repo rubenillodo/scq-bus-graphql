@@ -37,9 +37,14 @@ export type Query = {
   line?: Maybe<Line>;
   routes: Array<Route>;
   stops: Array<Stop>;
+  stop?: Maybe<Stop>;
 };
 
 export type QueryLineArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryStopArgs = {
   id: Scalars['ID'];
 };
 
@@ -197,6 +202,12 @@ export type QueryResolvers<
   >;
   routes?: Resolver<Array<ResolversTypes['Route']>, ParentType, ContextType>;
   stops?: Resolver<Array<ResolversTypes['Stop']>, ParentType, ContextType>;
+  stop?: Resolver<
+    Maybe<ResolversTypes['Stop']>,
+    ParentType,
+    ContextType,
+    QueryStopArgs
+  >;
 };
 
 export type RouteResolvers<
