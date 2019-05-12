@@ -61,7 +61,6 @@ export type Stop = {
   name: Scalars['String'];
   areaName?: Maybe<Scalars['String']>;
   location: Location;
-  routes: Array<Route>;
   arriving: Array<Arriving>;
 };
 import { AppContext } from './context';
@@ -229,7 +228,6 @@ export type StopResolvers<
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   areaName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   location?: Resolver<ResolversTypes['Location'], ParentType, ContextType>;
-  routes?: Resolver<Array<ResolversTypes['Route']>, ParentType, ContextType>;
   arriving?: Resolver<
     Array<ResolversTypes['Arriving']>,
     ParentType,

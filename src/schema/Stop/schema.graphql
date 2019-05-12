@@ -1,12 +1,10 @@
 # import DateTime from '../DateTime/schema.graphql'
-# import Route from '../Route/schema.graphql'
 
 type Stop {
   id: ID!
   name: String!
   areaName: String
   location: Location!
-  routes: [Route!]!
   arriving: [Arriving!]!
 }
 
