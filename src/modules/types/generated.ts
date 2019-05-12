@@ -28,6 +28,11 @@ export type Location = {
 
 export type Query = {
   lines: Array<Line>;
+  line?: Maybe<Line>;
+};
+
+export type QueryLineArgs = {
+  id: Scalars['ID'];
 };
 
 export type Route = {
@@ -155,6 +160,12 @@ export type QueryResolvers<
   ParentType = ResolversTypes['Query']
 > = {
   lines?: Resolver<Array<ResolversTypes['Line']>, ParentType, ContextType>;
+  line?: Resolver<
+    Maybe<ResolversTypes['Line']>,
+    ParentType,
+    ContextType,
+    QueryLineArgs
+  >;
 };
 
 export type RouteResolvers<

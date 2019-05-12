@@ -14,4 +14,14 @@ export const Query: QueryResolvers = {
         } as Line),
     );
   },
+  line: async (_parent, { id }, { dataSources: { officialApi } }) => {
+    const response = await officialApi.getLine({ id });
+
+    return {
+      id: `${response.id}`,
+      name: response.sinoptico,
+      description: response.nombre,
+      color: response.estilo,
+    } as Line;
+  },
 };
