@@ -8,6 +8,11 @@ export type Scalars = {
   Float: number;
 };
 
+export enum Direction {
+  Outward = 'OUTWARD',
+  Return = 'RETURN',
+}
+
 export type Line = {
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -27,6 +32,7 @@ export type Query = {
 
 export type Route = {
   name: Scalars['String'];
+  direction: Direction;
   stops: Array<Stop>;
 };
 
@@ -116,6 +122,7 @@ export type ResolversTypes = {
   ID: Scalars['ID'];
   String: Scalars['String'];
   Route: Route;
+  Direction: Direction;
   Stop: Stop;
   Location: Location;
   Float: Scalars['Float'];
@@ -153,6 +160,7 @@ export type RouteResolvers<
   ParentType = ResolversTypes['Route']
 > = {
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  direction?: Resolver<ResolversTypes['Direction'], ParentType, ContextType>;
   stops?: Resolver<Array<ResolversTypes['Stop']>, ParentType, ContextType>;
 };
 

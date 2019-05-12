@@ -6,8 +6,14 @@ type Line {
   routes: [Route!]!
 }
 
+enum Direction {
+  OUTWARD
+  RETURN
+}
+
 type Route {
   name: String!
+  direction: Direction!
   stops: [Stop!]!
 }
 
