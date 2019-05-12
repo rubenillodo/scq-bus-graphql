@@ -5,10 +5,10 @@ export interface LineResponse {
   nombre: string;
   informacion: string;
   estilo: string;
-  trayectos: ApiJourney[];
+  trayectos: ApiRoute[];
 }
 
-export interface ApiJourney {
+export interface ApiRoute {
   nombre: string;
   sentido: string;
   paradas: ApiStop[];
