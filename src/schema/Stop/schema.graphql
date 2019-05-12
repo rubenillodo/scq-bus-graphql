@@ -1,0 +1,11 @@
+type Stop {
+  id: ID!
+  name: String!
+  areaName: String
+  location: Location!
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
+}

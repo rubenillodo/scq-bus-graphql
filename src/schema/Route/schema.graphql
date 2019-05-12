@@ -1,0 +1,13 @@
+# import Stop from '../Stop/schema.graphql'
+
+enum Direction {
+  OUTWARD
+  RETURN
+}
+
+type Route {
+  id: ID!
+  name: String!
+  direction: Direction!
+  stops: [Stop!]!
+}

@@ -1,31 +1,9 @@
+# import Route from '../Route/schema.graphql'
+
 type Line {
   id: ID!
   name: String!
   description: String!
   color: String!
   routes: [Route!]!
-}
-
-enum Direction {
-  OUTWARD
-  RETURN
-}
-
-type Route {
-  id: ID!
-  name: String!
-  direction: Direction!
-  stops: [Stop!]!
-}
-
-type Stop {
-  id: ID!
-  name: String!
-  areaName: String
-  location: Location!
-}
-
-type Location {
-  latitude: Float!
-  longitude: Float!
 }
