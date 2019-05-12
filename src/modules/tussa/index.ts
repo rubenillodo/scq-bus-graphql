@@ -12,7 +12,7 @@ export class OfficialApi extends RESTDataSource {
     return this.get<LinesResponse>(`lineas`);
   }
 
-  async getLine({ id }: { id: string }): Promise<LineResponse> {
+  async getLine({ id }: { id: number | string }): Promise<LineResponse> {
     return this.get<LineResponse>(`lineas/${id}`);
   }
 }

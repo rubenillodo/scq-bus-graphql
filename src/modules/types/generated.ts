@@ -35,6 +35,7 @@ export type Route = {
   name: Scalars['String'];
   direction: Direction;
   stops: Array<Stop>;
+  line: Line;
 };
 
 export type Stop = {
@@ -164,6 +165,7 @@ export type RouteResolvers<
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   direction?: Resolver<ResolversTypes['Direction'], ParentType, ContextType>;
   stops?: Resolver<Array<ResolversTypes['Stop']>, ParentType, ContextType>;
+  line?: Resolver<ResolversTypes['Line'], ParentType, ContextType>;
 };
 
 export type StopResolvers<

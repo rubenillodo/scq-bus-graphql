@@ -1,3 +1,4 @@
+# import Line from '../Line/schema.graphql'
 # import Stop from '../Stop/schema.graphql'
 
 enum Direction {
@@ -10,4 +11,5 @@ type Route {
   name: String!
   direction: Direction!
   stops: [Stop!]!
+  line: Line!
 }
