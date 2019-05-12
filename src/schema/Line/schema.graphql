@@ -12,6 +12,7 @@ enum Direction {
 }
 
 type Route {
+  id: ID!
   name: String!
   direction: Direction!
   stops: [Stop!]!

@@ -31,6 +31,7 @@ export type Query = {
 };
 
 export type Route = {
+  id: Scalars['ID'];
   name: Scalars['String'];
   direction: Direction;
   stops: Array<Stop>;
@@ -159,6 +160,7 @@ export type RouteResolvers<
   ContextType = AppContext,
   ParentType = ResolversTypes['Route']
 > = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   direction?: Resolver<ResolversTypes['Direction'], ParentType, ContextType>;
   stops?: Resolver<Array<ResolversTypes['Stop']>, ParentType, ContextType>;
