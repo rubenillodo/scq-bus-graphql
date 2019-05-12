@@ -3,6 +3,8 @@ import { ApolloServer } from 'apollo-server';
 import { resolvers, typeDefs } from './schema';
 import { OfficialApi } from './modules/tussa';
 
+import 'apollo-cache-control';
+
 export const server = new ApolloServer({
   introspection: true,
   playground: true,

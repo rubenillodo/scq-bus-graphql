@@ -4,9 +4,12 @@ import {
   getLineFromLineId,
   getStopFromStopId,
 } from '../../modules/graph';
+import { SUPER_LONG_CACHE_DURATION } from '../../modules/cache';
 
 export const Query: QueryResolvers = {
-  lines: async (_parent, _args, { dataSources: { officialApi } }) => {
+  lines: async (_parent, _args, { dataSources: { officialApi } }, info) => {
+    info.cacheControl.setCacheHint({ maxAge: SUPER_LONG_CACHE_DURATION });
+
     const response = await officialApi.getLines();
 
     return response.map(line => ({
@@ -17,10 +20,13 @@ export const Query: QueryResolvers = {
       routes: [],
     }));
   },
-  line: async (_parent, { id }, context) => {
+  line: async (_parent, { id }, context, info) => {
+    info.cacheControl.setCacheHint({ maxAge: SUPER_LONG_CACHE_DURATION });
     return getLineFromLineId({ lineId: id, context });
   },
-  routes: async (_parent, _args, context) => {
+  routes: async (_parent, _args, context, info) => {
+    info.cacheControl.setCacheHint({ maxAge: SUPER_LONG_CACHE_DURATION });
+
     const lineIds = (await context.dataSources.officialApi.getLines()).map(
       ({ id }) => `${id}`,
     );
@@ -29,7 +35,9 @@ export const Query: QueryResolvers = {
       lineIds.map(async id => getRoutesFromLineId({ lineId: id, context })),
     )).flat();
   },
-  stops: async (_parent, _args, context) => {
+  stops: async (_parent, _args, context, info) => {
+    info.cacheControl.setCacheHint({ maxAge: SUPER_LONG_CACHE_DURATION });
+
     const lineIds = (await context.dataSources.officialApi.getLines()).map(
       ({ id }) => `${id}`,
     );
@@ -52,7 +60,8 @@ export const Query: QueryResolvers = {
 
     return stops;
   },
-  stop: async (_parent, { id }, context) => {
+  stop: async (_parent, { id }, context, info) => {
+    info.cacheControl.setCacheHint({ maxAge: SUPER_LONG_CACHE_DURATION });
     return getStopFromStopId({ stopId: id, context });
   },
 };
