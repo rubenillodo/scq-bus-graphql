@@ -3,4 +3,5 @@
 type Query {
   lines: [Line!]!
   line(id: ID!): Line
+  routes: [Route!]!
 }

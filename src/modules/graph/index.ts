@@ -1,0 +1,1 @@
+export { getRoutesFromLineId } from './getRoutesFromLineId';
