@@ -1,5 +1,5 @@
 import { QueryResolvers } from '../../modules/types';
-import { getRoutesFromLineId } from '../../modules/graph';
+import { getRoutesFromLineId, getLineFromLineId } from '../../modules/graph';
 
 export const Query: QueryResolvers = {
   lines: async (_parent, _args, { dataSources: { officialApi } }) => {
@@ -13,16 +13,8 @@ export const Query: QueryResolvers = {
       routes: [],
     }));
   },
-  line: async (_parent, { id }, { dataSources: { officialApi } }) => {
-    const response = await officialApi.getLine({ id });
-
-    return {
-      id: `${response.id}`,
-      name: response.sinoptico,
-      description: response.nombre,
-      color: response.estilo,
-      routes: [],
-    };
+  line: async (_parent, { id }, context) => {
+    return getLineFromLineId({ lineId: id, context });
   },
   routes: async (_parent, _args, context) => {
     const lineIds = (await context.dataSources.officialApi.getLines()).map(
