@@ -6,6 +6,12 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
+};
+
+export type Arriving = {
+  line: Line;
+  arriveAt: Scalars['DateTime'];
 };
 
 export enum Direction {
@@ -49,10 +55,16 @@ export type Stop = {
   name: Scalars['String'];
   areaName?: Maybe<Scalars['String']>;
   location: Location;
+  routes: Array<Route>;
+  arriving: Array<Arriving>;
 };
 import { AppContext } from './context';
 
-import { GraphQLResolveInfo } from 'graphql';
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from 'graphql';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -134,8 +146,23 @@ export type ResolversTypes = {
   Stop: Stop;
   Location: Location;
   Float: Scalars['Float'];
+  Arriving: Arriving;
+  DateTime: Scalars['DateTime'];
   Boolean: Scalars['Boolean'];
 };
+
+export type ArrivingResolvers<
+  ContextType = AppContext,
+  ParentType = ResolversTypes['Arriving']
+> = {
+  line?: Resolver<ResolversTypes['Line'], ParentType, ContextType>;
+  arriveAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+};
+
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
+}
 
 export type LineResolvers<
   ContextType = AppContext,
@@ -189,9 +216,17 @@ export type StopResolvers<
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   areaName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   location?: Resolver<ResolversTypes['Location'], ParentType, ContextType>;
+  routes?: Resolver<Array<ResolversTypes['Route']>, ParentType, ContextType>;
+  arriving?: Resolver<
+    Array<ResolversTypes['Arriving']>,
+    ParentType,
+    ContextType
+  >;
 };
 
 export type Resolvers<ContextType = AppContext> = {
+  Arriving?: ArrivingResolvers<ContextType>;
+  DateTime?: GraphQLScalarType;
   Line?: LineResolvers<ContextType>;
   Location?: LocationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

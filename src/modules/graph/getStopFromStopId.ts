@@ -22,5 +22,7 @@ export const getStopFromStopId = async ({
       latitude: response.coordenadas.latitud,
       longitude: response.coordenadas.longitud,
     },
+    routes: [],
+    arriving: [],
   };
 };
