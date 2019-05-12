@@ -1,10 +1,11 @@
 {
-  "name": "santiago-bus-graphql",
+  "name": "scq-bus-graphql",
   "version": "0.0.0-development",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rubenillodo/santiago-bus-graphql"
+    "url": "https://github.com/rubenillodo/scq-bus-graphql"
   },
+  "private": true,
   "license": "MIT",
   "engines": {
     "node": "^10.0.0"
