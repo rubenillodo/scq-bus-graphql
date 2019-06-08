@@ -10,11 +10,19 @@ export class OfficialApi extends RESTDataSource {
   }
 
   async getLines(): Promise<LinesResponse> {
-    return this.get<LinesResponse>(`lineas`);
+    const result = await this.get<LinesResponse>(`lineas`);
+    return result.map(line => ({
+      ...line,
+      sinoptico: line.sinoptico.replace(/^l/i, ''),
+    }));
   }
 
   async getLine({ id }: { id: number | string }): Promise<LineResponse> {
-    return this.get<LineResponse>(`lineas/${id}`);
+    const result = await this.get<LineResponse>(`lineas/${id}`);
+    return {
+      ...result,
+      sinoptico: result.sinoptico.replace(/^l/i, ''),
+    };
   }
 
   async getStop({ id }: { id: number | string }): Promise<StopResponse> {
