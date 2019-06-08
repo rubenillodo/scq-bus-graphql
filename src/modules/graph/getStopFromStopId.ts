@@ -32,5 +32,6 @@ export const getStopFromStopId = async ({
           }),
         } as Arriving),
     ),
+    routes: [],
   };
 };

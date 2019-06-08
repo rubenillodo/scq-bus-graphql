@@ -1,4 +1,5 @@
 # import DateTime from '../DateTime/schema.graphql'
+# import Route from '../Route/schema.graphql'
 
 type Stop {
   id: ID!
@@ -6,6 +7,7 @@ type Stop {
   areaName: String
   location: Location!
   arriving: [Arriving!]!
+  routes: [Route!]!
 }
 
 type Arriving {

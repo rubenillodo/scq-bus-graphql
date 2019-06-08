@@ -75,6 +75,7 @@ export type Stop = {
   areaName?: Maybe<Scalars['String']>;
   location: Location;
   arriving: Array<Arriving>;
+  routes: Array<Route>;
 };
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
@@ -237,6 +238,7 @@ export type StopResolvers<
     ParentType,
     ContextType
   >;
+  routes?: Resolver<Array<ResolversTypes['Route']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = AppContext> = {
