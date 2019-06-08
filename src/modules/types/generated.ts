@@ -1,4 +1,11 @@
+import {
+  GraphQLResolveInfo,
+  GraphQLScalarType,
+  GraphQLScalarTypeConfig,
+} from 'graphql';
+import { AppContext } from './context';
 export type Maybe<T> = T | null;
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -10,6 +17,7 @@ export type Scalars = {
 };
 
 export type Arriving = {
+  __typename?: 'Arriving';
   line: Line;
   arriveAt: Scalars['DateTime'];
 };
@@ -20,6 +28,7 @@ export enum Direction {
 }
 
 export type Line = {
+  __typename?: 'Line';
   id: Scalars['ID'];
   name: Scalars['String'];
   description: Scalars['String'];
@@ -28,11 +37,13 @@ export type Line = {
 };
 
 export type Location = {
+  __typename?: 'Location';
   latitude: Scalars['Float'];
   longitude: Scalars['Float'];
 };
 
 export type Query = {
+  __typename?: 'Query';
   lines: Array<Line>;
   line?: Maybe<Line>;
   routes: Array<Route>;
@@ -49,6 +60,7 @@ export type QueryStopArgs = {
 };
 
 export type Route = {
+  __typename?: 'Route';
   id: Scalars['ID'];
   name: Scalars['String'];
   direction: Direction;
@@ -57,21 +69,13 @@ export type Route = {
 };
 
 export type Stop = {
+  __typename?: 'Stop';
   id: Scalars['ID'];
   name: Scalars['String'];
   areaName?: Maybe<Scalars['String']>;
   location: Location;
   arriving: Array<Arriving>;
 };
-import { AppContext } from './context';
-
-import {
-  GraphQLResolveInfo,
-  GraphQLScalarType,
-  GraphQLScalarTypeConfig,
-} from 'graphql';
-
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
